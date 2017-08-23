@@ -1,7 +1,5 @@
+[![Build Status](https://travis-ci.org/AskToni/asktoni-client.svg?branch=master)](https://travis-ci.org/AskToni/asktoni-client)
 # asktoni-client
-
-> A Vue.js project
-
 ## Build Setup
 
 ``` bash
