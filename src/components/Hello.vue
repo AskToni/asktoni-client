@@ -1,20 +1,162 @@
 <template>
   <div class="hello">
-    <h1>AskToni</h1>
+    <h1>{{msg}}</h1>
+    <a v-bind:href="url">Home</a>
+    <p>
+      <form>
+        FirstName: <input type="text" v-model="firstname"/>
+        LastName: <input type="text" v-model.lazy="lastname"/>
+        <input type="submit" value="Submit"/>
+        <p>firstname: {{firstname}}</p>
+        <p>lastname: {{lastname}}</p>
+        <p>fullname: {{firstname + ', ' + lastname}}</p>
+        <div v-for="interest in interests" v-bind:key="interest">
+          <input type="checkbox" v-model="selectedInterests" :value="interest"/> {{interest}}
+        </div>
+        <p v-if="selectedInterests.length > 0">You selected: {{selectedInterests.join(', ')}}</p>
+        <p v-else>Please select at least one interest</p>
+        <div v-for="(key, value, index) in address" v-bind:key="key">
+          {{key}}: {{value}}
+        </div>
+        <button @click="change('itChanged', $event)">Change</button>
+      </form>
+      <div :style="fancyDiv"
+        @mouseover="fancyDiv.border = 'dashed 1px blue'"
+        @mouseout="fancyDiv.border = 'solid 1px black'">
+        JS Object literal bound to style
+      </div>
+      <div class="square" :class="{blue: cold, red: hot}"></div>
+      <div :class="[squareClass, {'dashed-border': selected}]"></div>
+      <div>
+        <input type="text" v-model.number="tempFahrenheit">
+        Temperature in Celsius: {{tempCelsius}}C from {{tempFahrenheit}}F
+      </div>
+      Got a question? Ask! (with products in query)
+      <input type="text" v-model="question">
+      {{response}}
+      <ul>
+        <li v-for="product in products" v-bind:key="product">{{product.name}}</li>
+      </ul>
+      <div id="global">
+        <global-component></global-component>
+        <local-component></local-component>
+      </div>
+    </p>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'hello',
+import $ from 'jquery';
+import GlobalComponent from '@/components/global-component';
+
+const localComponent = {
+  template: '<div>A local component: {{num}}</div>',
   data() {
     return {
-      msg: null,
+      num: Math.random(),
     };
+  },
+};
+
+export default {
+  name: 'hello',
+  components: {
+    GlobalComponent,
+    'local-component': localComponent,
+  },
+  data() {
+    return {
+      msg: 'AskToni',
+      url: 'http://google.ca',
+      firstname: 'Mike',
+      lastname: 'smith',
+      interests: ['Running', 'Cycling', 'Swimming'],
+      selectedInterests: [],
+      address: {
+        street: 'bob street',
+        city: 'la',
+        state: 'ca',
+      },
+      myFontSize: 24,
+      fancyDiv: { border: 'solid 2px black', 'margin-bottom': '30px' },
+      cold: true,
+      hot: false,
+      squareClass: 'square',
+      selected: true,
+      tempFahrenheit: 0,
+      question: '',
+      response: '',
+      products: [],
+    };
+  },
+  methods: {
+    change(...args) {
+      this.msg = 'Welcome!';
+      console.log(args);
+    },
+  },
+  computed: {
+    tempCelsius() {
+      return Math.round((5 / 9) * (this.tempFahrenheit - 32));
+    },
+  },
+  watch: {
+    question(newValue) {
+      if (newValue.indexOf('products') > -1) {
+        $.getJSON('https://hplussport.com/api/products').done((data) => {
+          this.products = data;
+          this.response = '';
+        });
+      } else {
+        this.response = "Don't understand";
+        this.products = [];
+      }
+    },
+  },
+  beforeCreate() {
+    console.log('beforeCreate');
+  },
+  created() {
+    console.log('created');
+  },
+  beforeMount() {
+    console.log('beforeMount');
+  },
+  mounted() {
+    console.log('mounted');
+  },
+  beforeUpdate() {
+    console.log('beforeUpdate');
+  },
+  updated() {
+    console.log('updated');
+  },
+  beforeDestroy() {
+    console.log('beforeDestroy');
+  },
+  destroyed() {
+    console.log('destroyed');
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .square {
+         width: 200px;
+         height: 200px;
+         margin-bottom: 20px;
+    }
+    .blue {
+        background-color: blue;
+    }
+    .red {
+        background-color: red;
+    }
+	.yellow {
+        background-color: yellow;
+    }
+    .dashed-border {
+        border: dashed 4px black;
+    }
 </style>
