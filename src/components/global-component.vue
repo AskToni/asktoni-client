@@ -1,6 +1,7 @@
 <template>
     <div>
         A global component
+        <slot name="top"></slot>
     </div>
 </template>
 

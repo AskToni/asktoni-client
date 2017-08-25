@@ -38,8 +38,17 @@
         <li v-for="product in products" v-bind:key="product">{{product.name}}</li>
       </ul>
       <div id="global">
-        <global-component></global-component>
-        <local-component></local-component>
+        <global-component>
+          <p slot="top">SLOT TEST</p>
+        </global-component>
+        <local-component :data="theData" title="Local title"></local-component>
+        <!-- <component is="local-component" :data="theData" title="Dynamic component"></component> -->
+        <b>***PRODUCT FLEXIBLE**</b>
+        <product-flexible :data="theData">
+          <template scope="props">
+            <strong>{{props.product.name}}</strong>
+          </template>
+        </product-flexible>
       </div>
     </p>
   </div>
@@ -49,12 +58,37 @@
 import $ from 'jquery';
 import GlobalComponent from '@/components/global-component';
 
+/* eslint-disable no-multi-str */
+const productFlexible = {
+  template: '<ul><li v-for="product in data">\
+                <slot :product="product"></slot>\
+              </li></ul>',
+  props: ['data'],
+};
+
+const productAdditional = {
+  template: '<div>Nested component {{product.description}}</div>',
+  props: ['product'],
+};
+
 const localComponent = {
-  template: '<div>A local component: {{num}}</div>',
+  template: '<div>\
+            A local component {{title}}: {{num}}\
+            <ul>\
+              <li v-for="product in data">\
+                <p><strong>{{product.name}}</strong></p>\
+                <product-additional :product="product"></product-additional>\
+              </li>\
+            </ul>\
+            </div>',
   data() {
     return {
       num: Math.random(),
     };
+  },
+  props: ['data', 'title'],
+  components: {
+    'product-additional': productAdditional,
   },
 };
 
@@ -63,6 +97,7 @@ export default {
   components: {
     GlobalComponent,
     'local-component': localComponent,
+    'product-flexible': productFlexible,
   },
   data() {
     return {
@@ -87,6 +122,7 @@ export default {
       question: '',
       response: '',
       products: [],
+      theData: [],
     };
   },
   methods: {
@@ -118,6 +154,9 @@ export default {
   },
   created() {
     console.log('created');
+    $.getJSON('https://hplussport.com/api/products').done((data) => {
+      this.theData = data;
+    });
   },
   beforeMount() {
     console.log('beforeMount');
