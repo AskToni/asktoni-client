@@ -67,17 +67,23 @@ const productFlexible = {
 };
 
 const productAdditional = {
-  template: '<div>Nested component {{product.description}}</div>',
-  props: ['product'],
+  template: '<div>Nested component {{product.description}}<a @click="clickedMethod">Click me!</a>\
+  <a @click="requestClick">Me too!</a></div>',
+  props: ['product', 'clickedMethod'],
+  methods: {
+    requestClick() {
+      this.$emit('click');
+    },
+  },
 };
 
 const localComponent = {
   template: '<div>\
             A local component {{title}}: {{num}}\
             <ul>\
-              <li v-for="product in data">\
+              <li v-for="(product, i) in data">\
                 <p><strong>{{product.name}}</strong></p>\
-                <product-additional :product="product"></product-additional>\
+                <product-additional @click="click(i)" :clicked-method="clicked.bind(this, i)" :product="product" :key="product.id"></product-additional>\
               </li>\
             </ul>\
             </div>',
@@ -89,6 +95,14 @@ const localComponent = {
   props: ['data', 'title'],
   components: {
     'product-additional': productAdditional,
+  },
+  methods: {
+    clicked(i) {
+      console.log(`You clicked${i}`);
+    },
+    click(i) {
+      console.log(`V2: You clicked${i}`);
+    },
   },
 };
 
