@@ -11,8 +11,9 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.hello')
-      .assert.containsText('h1', 'AskToni')
+      .assert.elementPresent('.index')
+      .assert.containsText('.index:nth-child(1)', 'This should be a dashboard, but for now...')
+      .assert.containsText('.index:nth-child(1)', 'Hello, let\'s get started at the top left')
       .end();
   },
 };
