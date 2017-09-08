@@ -51,7 +51,11 @@
 
 <script>
 export default {
-    name: 'app',
+    data() {
+        return {
+            name: 'app'
+        };
+    },
     methods: {
         toggleLeftSidenav() {
             this.$refs.leftSidenav.toggle();

@@ -1,57 +1,141 @@
 <template>
   <div class="restaurants">
-    <md-table-card>
-      <md-toolbar>
-        <h1 class="md-title">Nutrition</h1>
-        <md-button class="md-icon-button">
-          <md-icon>filter_list</md-icon>
-        </md-button>
+        <md-table-card>
+            <md-toolbar>
+                <h1 class="md-title">{{name}}</h1>
+                <md-button class="md-icon-button">
+                <md-icon>filter_list</md-icon>
+                </md-button>
 
-        <md-button class="md-icon-button">
-          <md-icon>search</md-icon>
-        </md-button>
-      </md-toolbar>
+                <md-button class="md-icon-button">
+                <md-icon>search</md-icon>
+                </md-button>
+            </md-toolbar>
 
-      <md-table md-sort="dessert" md-sort-type="desc" @select="onSelect" @sort="onSort">
-        <md-table-header>
-          <md-table-row>
-            <md-table-head md-sort-by="dessert">Dessert (100g serving)</md-table-head>
-            <md-table-head md-sort-by="calories" md-numeric md-tooltip="The total amount of food energy and the given serving size">Calories (g)</md-table-head>
-            <md-table-head md-sort-by="fat" md-numeric>Fat (g)</md-table-head>
-            <md-table-head>
-              <md-icon>message</md-icon>
-              <span>Comments</span>
-            </md-table-head>
-          </md-table-row>
-        </md-table-header>
+            <md-table md-sort="restaurantName" md-sort-type="desc" @sort="onSort">
+                <md-table-header>
+                <md-table-row>
+                    <md-table-head v-for="(col, colIndex) in columns" :key="colIndex" :md-item="col" :md-sort-by="col.name">
+                        {{ col.name }}
+                    </md-table-head>
+                </md-table-row>
+                </md-table-header>
 
-        <md-table-body>
-          <md-table-row v-for="(row, rowIndex) in nutrition" :key="rowIndex" :md-item="row" md-auto-select md-selection>
-            <md-table-cell v-for="(column, columnIndex) in row" :key="columnIndex" :md-numeric="columnIndex !== 'dessert' && columnIndex !== 'comment'" v-if="columnIndex !== 'type'">
-              {{ column }}
-            </md-table-cell>
-          </md-table-row>
-        </md-table-body>
-      </md-table>
+                <md-table-body>
+                <md-table-row v-for="(row, rowIndex) in tableRows" :key="rowIndex" :md-item="row">
+                    <md-table-cell v-for="(column, columnIndex) in row" :key="columnIndex" v-if="renderedColumns[columnIndex]">
+                    {{ column }}
+                    </md-table-cell>
+                </md-table-row>
+                </md-table-body>
+            </md-table>
 
-      <md-table-pagination
-        md-size="5"
-        md-total="10"
-        md-page="1"
-        md-label="Rows"
-        md-separator="of"
-        :md-page-options="[5, 10, 25, 50]"
-        @pagination="onPagination"></md-table-pagination>
-    </md-table-card>
+            <md-table-pagination
+                :md-size="page.limit"
+                :md-total="modelCount"
+                :md-page="page.offset"
+                :md-label="name"
+                :md-page-options="page.options"
+                @pagination="onPagination"></md-table-pagination>
+        </md-table-card>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-    name: 'restaurants'
+    components: {
+    },
+    computed: {
+        renderedColumns() {
+            const renderedColumns = {};
+            this.columns.forEach((column) => {
+                renderedColumns[column.value] = 1;
+            });
+            return renderedColumns;
+        },
+        tableRows() {
+            const offset = (this.page.offset - 1) * this.page.limit;
+            return this.model.slice(offset, offset + this.page.limit);
+        },
+        columnHash() {
+            const hash = {};
+            this.columns.forEach((column) => {
+                hash[column.name] = column.value;
+            });
+            return hash;
+        }
+    },
+    data() {
+        return {
+            name: 'Restaurants',
+            columns: [
+                {
+                    name: 'Restaurant',
+                    value: 'restaurantName'
+                },
+                {
+                    name: 'Reviews',
+                    value: 'reviewCount'
+                },
+                {
+                    name: 'Rating',
+                    value: 'rating'
+                },
+                {
+                    name: 'Price',
+                    value: 'price'
+                }
+            ],
+            model: [],
+            modelCount: 0,
+            page: {
+                options: [10, 25, 50, 100],
+                offset: 1,
+                limit: 10
+            }
+        };
+    },
+    methods: {
+        clientSort(a, b, type, name) {
+            switch (name) {
+            case 'restaurantName':
+            case 'price':
+                return type === 'asc' ? a[name].localeCompare(b[name])
+                    : b[name].localeCompare(a[name]);
+            default:
+                return type === 'asc' ? a[name] - b[name] : b[name] - a[name];
+            }
+        },
+        onPagination(args) {
+            const { size = 10, page = 1 } = args;
+            this.page.limit = size;
+            this.page.offset = page;
+        },
+        onSort(args) {
+            const { type = 'asc' } = args;
+            const name = this.columnHash[args.name];
+            this.model.sort((a, b) => this.clientSort(a, b, type, name));
+        }
+    },
+    async created() {
+        try {
+            const response = await axios.get('http://asktoniapi.azurewebsites.net/api/Restaurant');
+            this.model = response.data;
+            this.modelCount = response.data.length;
+        } catch (e) {
+            this.errors.push(e);
+        }
+    }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss">
+    .restaurants .md-table-head-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
