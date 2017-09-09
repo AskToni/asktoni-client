@@ -1,17 +1,20 @@
 <template>
   <div class="restaurants">
+        <md-progress md-indeterminate class="md-accent" v-if="getModel.isActive"></md-progress>
+        <md-progress md-indeterminate v-else style="opacity: 0;"></md-progress>
         <md-table-card>
-            <md-toolbar>
-                <h1 class="md-title">{{name}}</h1>
-                <md-button class="md-icon-button">
-                <md-icon>filter_list</md-icon>
-                </md-button>
-
-                <md-button class="md-icon-button">
-                <md-icon>search</md-icon>
-                </md-button>
-            </md-toolbar>
-
+            <form novalidate @submit.stop.prevent="submit">
+                <md-layout md-row>
+                    <md-layout md-flex="5"><md-icon>search</md-icon></md-layout>
+                    <md-layout md-flex="30">
+                        <md-input-container>
+                        <label>Restaurant name</label>
+                        <md-input v-model="searchValue" @change="getModel.run()" placeholder="Search..." :debounce="300"></md-input>
+                        </md-input-container>
+                    </md-layout>
+                    <md-layout md-flex="30"><h1 class="md-title">{{name}}</h1></md-layout>
+                </md-layout>
+            </form>
             <md-table md-sort="restaurantName" md-sort-type="desc" @sort="onSort">
                 <md-table-header>
                 <md-table-row>
@@ -65,6 +68,9 @@ export default {
                 hash[column.name] = column.value;
             });
             return hash;
+        },
+        modelCount() {
+            return this.model.length;
         }
     },
     data() {
@@ -89,12 +95,12 @@ export default {
                 }
             ],
             model: [],
-            modelCount: 0,
             page: {
                 options: [10, 25, 50, 100],
                 offset: 1,
                 limit: 10
-            }
+            },
+            searchValue: ''
         };
     },
     methods: {
@@ -117,22 +123,38 @@ export default {
             const { type = 'asc' } = args;
             const name = this.columnHash[args.name];
             this.model.sort((a, b) => this.clientSort(a, b, type, name));
+        },
+        resetPagination() {
+            this.page.offset = 1;
+        },
+        searchFilter(restaurant, filterValue) {
+            return restaurant.filter(model =>
+                model.restaurantName.toLowerCase().replace(/\s/g, '')
+            .includes(filterValue.toLowerCase().replace(/\s/g, '')));
         }
     },
-    async created() {
-        try {
-            const response = await axios.get('http://asktoniapi.azurewebsites.net/api/Restaurant');
-            this.model = response.data;
-            this.modelCount = response.data.length;
-        } catch (e) {
-            this.errors.push(e);
-        }
+    created() {
+        this.getModel.run();
+    },
+    tasks(t) {
+        return t(function* getModel() {
+            try {
+                const response = yield axios.get('http://asktoniapi.azurewebsites.net/api/Restaurant');
+                this.model = response.data;
+                if (this.searchValue !== '') {
+                    this.model = this.searchFilter(this.model, this.searchValue);
+                }
+                this.resetPagination();
+            } catch (e) {
+                this.errors.push(e);
+            }
+        });
     }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
+<style lang="scss" scoped>
     .restaurants .md-table-head-container{
         display: flex;
         align-items: center;

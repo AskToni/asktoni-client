@@ -6,6 +6,7 @@ import App from './App';
 import router from './router';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.css';
+import Vuency from 'vuency';
 
 Vue.config.productionTip = false;
 
@@ -74,6 +75,7 @@ Vue.material.registerTheme({
 });
 
 Vue.material.setCurrentTheme('default');
+Vue.use(Vuency);
 
 /* eslint-disable no-new */
 new Vue({
