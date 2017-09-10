@@ -9,6 +9,7 @@
     "ci-test": "npm run unit",
     "clean": "rm -rf node_modules dist && yarn install",
     "deploy": "rm -rf dist && npm run build && surge dist asktoni.surge.sh",
+    "deploy-staging": "rm -rf dist && npm run build && surge dist asktoni-staging.surge.sh",
     "dev": "node build/dev-server.js",
     "e2e": "node test/e2e/runner.js",
     "lint": "eslint . --max-warnings 0 --ext .js,.vue src config test/unit/specs test/e2e/specs",
