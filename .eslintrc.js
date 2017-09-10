@@ -40,24 +40,6 @@ module.exports = {
     'linebreak-style': ["error", "unix"],
     'no-console': 0,
     "comma-dangle": ["error", "never"],
-    "indent": ["error", 4],
-    // "vue/order-in-components": [2, {
-    //   order: [
-    //     ['name', 'delimiters', 'functional', 'model'],
-    //     ['components', 'directives', 'filters'],
-    //     ['parent', 'mixins', 'extends', 'provide', 'inject'],
-    //     'el',
-    //     'template',
-    //     'props',
-    //     'propsData',
-    //     'data',
-    //     'computed',
-    //     'watch',
-    //     'LIFECYCLE_HOOKS',
-    //     'methods',
-    //     'render',
-    //     'renderError'
-    //   ]
-    // }]
+    "indent": ["error", 4]
   }
 }
