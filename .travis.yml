@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-- '6'
+- '8'
 cache:
   directories:
   - node_modules
@@ -11,3 +11,8 @@ script:
 - npm run build
 - npm run ci-test
 - npm run lint
+deploy:
+  provider: surge
+  project: ./dist/
+  domain: asktoni.surge.sh
+  skip_cleanup: true

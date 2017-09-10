@@ -2,17 +2,21 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
+    parser: 'babel-eslint',
     sourceType: 'module'
   },
   env: {
     browser: true,
   },
-  extends: 'airbnb-base',
+  extends: [
+    'airbnb-base', 
+    'plugin:vue/base',
+    'plugin:vue/recommended'
+],
   // required to lint *.vue files
   plugins: [
-    'html'
+    'html',
   ],
   // check if imports actually resolve
   'settings': {
@@ -38,6 +42,24 @@ module.exports = {
     'linebreak-style': ["error", "unix"],
     'no-console': 0,
     "comma-dangle": ["error", "never"],
-    "indent": ["error", 4]
+    "indent": ["error", 4],
+    "vue/order-in-components": [2, {
+      order: [
+        ['name', 'delimiters', 'functional', 'model'],
+        ['components', 'directives', 'filters'],
+        ['parent', 'mixins', 'extends', 'provide', 'inject'],
+        'el',
+        'template',
+        'props',
+        'propsData',
+        'data',
+        'computed',
+        'watch',
+        'LIFECYCLE_HOOKS',
+        'methods',
+        'render',
+        'renderError'
+      ]
+    }]
   }
 }

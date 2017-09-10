@@ -23,17 +23,11 @@
         <md-list>
           <md-list-item>
             <router-link to="/" @click.native="toggleLeftSidenav" class="md-button" :class="`md-theme-${$material.currentTheme}`">
-              <md-icon>home</md-icon> <span>Home</span>
-              <md-ink-ripple />
-            </router-link>
-          </md-list-item>
-          <md-divider class="md-inset"></md-divider>
-          <md-list-item>
-            <router-link to="/restaurants" @click.native="toggleLeftSidenav" class="md-button" :class="`md-theme-${$material.currentTheme}`">
               <md-icon>restaurant</md-icon> <span>Restaurants</span>
               <md-ink-ripple />
             </router-link>
           </md-list-item>
+          <md-divider class="md-inset"></md-divider>
           <md-list-item>
             <router-link to="/reviews" @click.native="toggleLeftSidenav" class="md-button" :class="`md-theme-${$material.currentTheme}`">
               <md-icon>rate_review</md-icon> <span>Reviews</span>

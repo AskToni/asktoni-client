@@ -109,7 +109,7 @@ export default {
             case 'restaurantName':
             case 'price':
                 return type === 'asc' ? a[name].localeCompare(b[name])
-                    : b[name].localeCompare(a[name]);
+                : b[name].localeCompare(a[name]);
             default:
                 return type === 'asc' ? a[name] - b[name] : b[name] - a[name];
             }
@@ -133,9 +133,6 @@ export default {
             .includes(filterValue.toLowerCase().replace(/\s/g, '')));
         }
     },
-    created() {
-        this.getModel.run();
-    },
     tasks(t) {
         return t(function* getModel() {
             try {
@@ -149,6 +146,9 @@ export default {
                 this.errors.push(e);
             }
         });
+    },
+    created() {
+        this.getModel.run();
     }
 };
 </script>

@@ -11,13 +11,13 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'Index',
-            component: Index
-        },
-        {
-            path: '/restaurants',
             name: 'Restaurants',
             component: Restaurants
+        },
+        {
+            path: '/index',
+            name: 'Index',
+            component: Index
         },
         {
             path: '/reviews',
