@@ -1,11 +1,9 @@
 import Vue from 'vue';
 import Restaurants from '@/components/Restaurants';
-import Vuency from 'vuency';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.css';
 
 function setup() {
-    Vue.use(Vuency);
     Vue.use(VueMaterial);
 
     Vue.material.registerTheme({

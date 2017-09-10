@@ -10,14 +10,8 @@ module.exports = {
 
         browser
             .url(devServer)
-            // .waitForElementVisible('#app', 5000)
-            // .assert.elementPresent('.index')
-            // .assert.containsText(
-            //     '.index:nth-child(1)',
-            //     'This should be a dashboard, but for now...'
-            // )
-            // .assert.containsText('.index:nth-child(1)',
-            // "Hello, let's get started at the top left")
+            .waitForElementVisible('#app', 5000)
+            .assert.elementPresent('.restaurants')
             .end();
     }
 };

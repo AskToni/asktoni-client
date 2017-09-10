@@ -1,6 +1,6 @@
 <template>
   <div class="restaurants">
-        <md-progress md-indeterminate class="md-accent" v-if="getModel.isActive"></md-progress>
+        <md-progress md-indeterminate class="md-accent" v-if="isLoading"></md-progress>
         <md-progress md-indeterminate v-else style="opacity: 0;"></md-progress>
         <md-table-card>
             <form novalidate @submit.stop.prevent="submit">
@@ -9,7 +9,7 @@
                     <md-layout md-flex="30">
                         <md-input-container>
                         <label>Restaurant name</label>
-                        <md-input v-model="searchValue" @change="getModel.run()" placeholder="Search..." :debounce="300"></md-input>
+                        <md-input v-model="searchValue" @change="getModel()" placeholder="Search..." :debounce="300"></md-input>
                         </md-input-container>
                     </md-layout>
                     <md-layout md-flex="30"><h1 class="md-title">{{name}}</h1></md-layout>
@@ -100,7 +100,8 @@ export default {
                 offset: 1,
                 limit: 10
             },
-            searchValue: ''
+            searchValue: '',
+            isLoading: true
         };
     },
     methods: {
@@ -109,9 +110,23 @@ export default {
             case 'restaurantName':
             case 'price':
                 return type === 'asc' ? a[name].localeCompare(b[name])
-                : b[name].localeCompare(a[name]);
+                    : b[name].localeCompare(a[name]);
             default:
                 return type === 'asc' ? a[name] - b[name] : b[name] - a[name];
+            }
+        },
+        async getModel() {
+            try {
+                this.isLoading = true;
+                const response = await axios.get('http://asktoniapi.azurewebsites.net/api/Restaurant');
+                this.model = response.data;
+                if (this.searchValue !== '') {
+                    this.model = this.searchFilter(this.model, this.searchValue);
+                }
+                this.resetPagination();
+                this.isLoading = false;
+            } catch (e) {
+                this.errors.push(e);
             }
         },
         onPagination(args) {
@@ -130,25 +145,11 @@ export default {
         searchFilter(restaurant, filterValue) {
             return restaurant.filter(model =>
                 model.restaurantName.toLowerCase().replace(/\s/g, '')
-            .includes(filterValue.toLowerCase().replace(/\s/g, '')));
+                    .includes(filterValue.toLowerCase().replace(/\s/g, '')));
         }
     },
-    tasks(t) {
-        return t(function* getModel() {
-            try {
-                const response = yield axios.get('http://asktoniapi.azurewebsites.net/api/Restaurant');
-                this.model = response.data;
-                if (this.searchValue !== '') {
-                    this.model = this.searchFilter(this.model, this.searchValue);
-                }
-                this.resetPagination();
-            } catch (e) {
-                this.errors.push(e);
-            }
-        });
-    },
     created() {
-        this.getModel.run();
+        this.getModel();
     }
 };
 </script>
