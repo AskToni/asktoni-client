@@ -9,6 +9,7 @@ notifications:
   email: false
 script:
 - npm rebuild node-sass
+- npm rebuild phantom-prebuilt
 - npm run build
 - npm run ci-test
 - npm run lint
