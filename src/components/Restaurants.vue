@@ -18,7 +18,8 @@
             <md-table md-sort="restaurantName" md-sort-type="desc" @sort="onSort">
                 <md-table-header>
                 <md-table-row>
-                    <md-table-head v-for="(col, colIndex) in columns" :key="colIndex" :md-item="col" :md-sort-by="col.name">
+                    <md-table-head v-for="(col, colIndex) in columns" :key="colIndex" :md-item="col" :md-sort-by="col.name"
+                    :style="{width: (col.width ? col.width : null)}">
                         {{ col.name }}
                     </md-table-head>
                 </md-table-row>
@@ -79,19 +80,23 @@ export default {
             columns: [
                 {
                     name: 'Restaurant',
-                    value: 'restaurantName'
+                    value: 'restaurantName',
+                    width: '50%'
                 },
                 {
                     name: 'Reviews',
-                    value: 'reviewCount'
+                    value: 'reviewCount',
+                    width: '10%'
                 },
                 {
                     name: 'Rating',
-                    value: 'rating'
+                    value: 'rating',
+                    width: '10%'
                 },
                 {
                     name: 'Price',
-                    value: 'price'
+                    value: 'price',
+                    width: '10%'
                 }
             ],
             model: [],
