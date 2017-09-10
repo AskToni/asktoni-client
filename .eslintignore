@@ -1,4 +1,4 @@
 build/*.js
-config/*.js
 test/unit/coverage
 dist/
+node_modules/

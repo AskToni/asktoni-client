@@ -16,5 +16,4 @@ selenium-debug.log
 *.sln
 
 # Code
-package-lock.json
-.vscode
+.vscode/launch.json

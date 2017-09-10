@@ -7,12 +7,12 @@
 
 <script>
 export default {
-  name: 'index',
-  data() {
-    return {
-      msg: null,
-    };
-  },
+    name: 'index',
+    data() {
+        return {
+            msg: null
+        };
+    }
 };
 </script>
 

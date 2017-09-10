@@ -8,26 +8,26 @@ import Users from '@/components/Users';
 Vue.use(Router);
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Index',
-      component: Index,
-    },
-    {
-      path: '/restaurants',
-      name: 'Restaurants',
-      component: Restaurants,
-    },
-    {
-      path: '/reviews',
-      name: 'Reviews',
-      component: Reviews,
-    },
-    {
-      path: '/users',
-      name: 'Users',
-      component: Users,
-    },
-  ],
+    routes: [
+        {
+            path: '/',
+            name: 'Restaurants',
+            component: Restaurants
+        },
+        {
+            path: '/index',
+            name: 'Index',
+            component: Index
+        },
+        {
+            path: '/reviews',
+            name: 'Reviews',
+            component: Reviews
+        },
+        {
+            path: '/users',
+            name: 'Users',
+            component: Users
+        }
+    ]
 });

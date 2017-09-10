@@ -9,10 +9,12 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: 'airbnb-base',
+  extends: [
+    'airbnb-base'
+],
   // required to lint *.vue files
   plugins: [
-    'html'
+    'html',
   ],
   // check if imports actually resolve
   'settings': {
@@ -37,5 +39,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'linebreak-style': ["error", "unix"],
     'no-console': 0,
+    "comma-dangle": ["error", "never"],
+    "indent": ["error", 4]
   }
 }
