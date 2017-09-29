@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Index from '@/components/Index';
 import Restaurants from '@/components/Restaurants';
+import RestaurantDetail from '@/components/RestaurantDetail';
 import Reviews from '@/components/Reviews';
 import Users from '@/components/Users';
 
@@ -13,6 +14,11 @@ export default new Router({
             path: '/',
             name: 'Restaurants',
             component: Restaurants
+        },
+        {
+            path: '/restaurant/:id',
+            name: 'Restaurant Detail',
+            component: RestaurantDetail
         },
         {
             path: '/index',
