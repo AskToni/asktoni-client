@@ -27,8 +27,13 @@
 
                 <md-table-body>
                 <md-table-row v-for="(row, rowIndex) in tableRows" :key="rowIndex" :md-item="row">
-                    <md-table-cell v-for="(column, columnIndex) in row" :key="columnIndex" v-if="renderedColumns[columnIndex]">
-                    {{ column }}
+                    <md-table-cell v-for="(column, key) in row" :key="key" v-if="renderedColumns[key]">
+                    <span v-if="key !== 'restaurantName'">
+                        {{ column }}
+                    </span>
+                    <span v-else>
+                        <router-link :to="'restaurant/' + row.id">{{ column }}</router-link>
+                    </span>
                     </md-table-cell>
                 </md-table-row>
                 </md-table-body>
@@ -55,7 +60,7 @@ export default {
         renderedColumns() {
             const renderedColumns = {};
             this.columns.forEach((column) => {
-                renderedColumns[column.value] = 1;
+                renderedColumns[column.value] = true;
             });
             return renderedColumns;
         },
@@ -161,9 +166,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-    .restaurants /deep/ .md-table-head-container{
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .restaurants /deep/ {
+        .md-table-head-container, .md-has-action .md-table-cell-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 </style>
