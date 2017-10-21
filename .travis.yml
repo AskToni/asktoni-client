@@ -5,11 +5,11 @@ node_js:
 notifications:
   email: true
 script:
-- npm rebuild node-sass
-- npm rebuild phantom-prebuilt
-- npm run build
-- npm run ci-test
-- npm run lint
+- yarn rebuild node-sass
+- yarn rebuild phantom-prebuilt
+- yarn run build
+- yarn run ci-test
+- yarn run lint
 deploy:
   provider: surge
   project: ./dist/
