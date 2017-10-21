@@ -5,8 +5,6 @@ node_js:
 notifications:
   email: true
 script:
-- yarn rebuild node-sass
-- yarn rebuild phantom-prebuilt
 - yarn run build
 - yarn run ci-test
 - yarn run lint
