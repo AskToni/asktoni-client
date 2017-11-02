@@ -26,7 +26,7 @@
                 </md-table-header>
 
                 <md-table-body>
-                <md-table-row v-for="(row, rowIndex) in tableRows" :key="rowIndex" :md-item="row">
+                <md-table-row v-for="(row, rowIndex) in model" :key="rowIndex" :md-item="row">
                     <md-table-cell v-for="(column, key) in row" :key="key" v-if="renderedColumns[key]">
                     <span v-if="key !== 'restaurantName'">
                         {{ column }}
@@ -40,11 +40,11 @@
             </md-table>
 
             <md-table-pagination
-                :md-size="page.limit"
-                :md-total="modelCount"
-                :md-page="page.offset"
+                :md-size="pageLimit"
+                md-total="Many"
+                :md-page="pageOffset"
                 :md-label="name"
-                :md-page-options="page.options"
+                :md-page-options="pageOptions"
                 @pagination="onPagination"></md-table-pagination>
         </md-table-card>
   </div>
@@ -64,19 +64,12 @@ export default {
             });
             return renderedColumns;
         },
-        tableRows() {
-            const offset = (this.page.offset - 1) * this.page.limit;
-            return this.model.slice(offset, offset + this.page.limit);
-        },
         columnHash() {
             const hash = {};
             this.columns.forEach((column) => {
                 hash[column.name] = column.value;
             });
             return hash;
-        },
-        modelCount() {
-            return this.model.length;
         }
     },
     data() {
@@ -105,11 +98,9 @@ export default {
                 }
             ],
             model: [],
-            page: {
-                options: [10, 25, 50, 100],
-                offset: 1,
-                limit: 10
-            },
+            pageLimit: 10,
+            pageOffset: 1,
+            pageOptions: [10, 25, 50, 100],
             searchValue: '',
             isLoading: true
         };
@@ -125,15 +116,16 @@ export default {
                 return type === 'asc' ? a[name] - b[name] : b[name] - a[name];
             }
         },
-        async getModel() {
+        async getModel({ pageLimit = 10, pageOffset = 1 }) {
             try {
                 this.isLoading = true;
-                const response = await axios.get('http://asktoniapi.azurewebsites.net/api/Restaurant');
+                const response = await axios.get(`http://asktoniapi.azurewebsites.net/api/Restaurant?pageLimit=${pageLimit}&pageOffset=${pageOffset}`);
+                this.pageLimit = pageLimit;
+                this.pageOffset = pageOffset;
                 this.model = response.data;
                 if (this.searchValue !== '') {
                     this.model = this.searchFilter(this.model, this.searchValue);
                 }
-                this.resetPagination();
                 this.isLoading = false;
             } catch (e) {
                 this.errors.push(e);
@@ -141,16 +133,12 @@ export default {
         },
         onPagination(args) {
             const { size = 10, page = 1 } = args;
-            this.page.limit = size;
-            this.page.offset = page;
+            this.$router.push({ name: 'Restaurants', query: { pageOffset: page, pageLimit: size } });
         },
         onSort(args) {
             const { type = 'asc' } = args;
             const name = this.columnHash[args.name];
             this.model.sort((a, b) => this.clientSort(a, b, type, name));
-        },
-        resetPagination() {
-            this.page.offset = 1;
         },
         searchFilter(restaurant, filterValue) {
             return restaurant.filter(model =>
@@ -158,8 +146,13 @@ export default {
                     .includes(filterValue.toLowerCase().replace(/\s/g, '')));
         }
     },
-    created() {
-        this.getModel();
+    mounted() {
+        this.getModel(this.$route.query);
+    },
+    watch: {
+        $route(to) {
+            this.getModel(to.query);
+        }
     }
 };
 </script>
