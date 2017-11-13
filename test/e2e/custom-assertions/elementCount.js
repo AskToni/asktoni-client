@@ -20,9 +20,10 @@ exports.assertion = function (selector, count) {
     this.command = function (cb) {
         const self = this;
         return this.api.execute(
-            () => document.querySelectorAll(selector).length, 
+            () => document.querySelectorAll(selector).length,
             [selector], (res) => {
                 cb.call(self, res);
-            });
+            }
+        );
     };
 };
