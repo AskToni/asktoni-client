@@ -23,7 +23,7 @@
   },
   "lint-staged": {
     "{src,test/unit/specs,test/e2e/specs,config}/**/!(.eslintrc).js": [
-      "prettier --single-quote --tab-width 4 --print-width 100 --write",
+      "npm run prettier",
       "eslint . --fix --max-warnings 0 --ext .js,.vue src config test/unit/specs test/e2e/specs",
       "git add"
     ]
