@@ -29,8 +29,8 @@
           </md-list-item>
           <md-divider class="md-inset"></md-divider>
           <md-list-item>
-            <router-link to="/reviews" @click.native="toggleLeftSidenav" class="md-button" :class="`md-theme-${$material.currentTheme}`">
-              <md-icon>rate_review</md-icon> <span>Reviews</span>
+            <router-link to="/recommendations" @click.native="toggleLeftSidenav" class="md-button" :class="`md-theme-${$material.currentTheme}`">
+              <md-icon>map</md-icon> <span>Recommendations</span>
               <md-ink-ripple />
             </router-link>
           </md-list-item>
