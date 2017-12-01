@@ -79,6 +79,6 @@ describe('Restaurants.vue', () => {
     it('should render correct contents', () => {
         const Constructor = Vue.extend(Restaurants);
         const vm = new Constructor().$mount();
-        expect(vm.$el.querySelector('.restaurants .md-title').textContent).to.equal('Restaurants');
+        expect(vm.$el.querySelector('.restaurants .md-title').textContent).to.equal('Ask Toni');
     });
 });
