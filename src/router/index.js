@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import Index from '@/components/Index';
 import Restaurants from '@/components/Restaurants';
 import RestaurantDetail from '@/components/RestaurantDetail';
-import Reviews from '@/components/Reviews';
+import Recommendations from '@/components/Recommendations';
 import Users from '@/components/Users';
 
 Vue.use(Router);
@@ -26,9 +26,9 @@ export default new Router({
             component: Index
         },
         {
-            path: '/reviews',
-            name: 'Reviews',
-            component: Reviews
+            path: '/recommendations',
+            name: 'Recommendations',
+            component: Recommendations
         },
         {
             path: '/users',

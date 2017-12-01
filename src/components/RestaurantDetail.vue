@@ -1,5 +1,42 @@
 <template>
   <div class="restaurantDetail">
+    <md-toolbar>
+        <md-button class="md-icon-button" @click="toggleLeftSidenav">
+            <md-icon>menu</md-icon>
+        </md-button>
+
+        <h2 class="md-title">Ask Toni</h2>
+        <span style="flex: 1"></span>
+        <md-button class="md-icon-button" @click="transition('users')">
+            <md-icon>account_circle</md-icon>
+        </md-button>
+    </md-toolbar>
+
+    <md-sidenav class="main-sidebar md-left md-fixed" ref="leftSidenav">
+    <md-toolbar>
+        <div class="md-toolbar-container">
+        <h3 class="md-title">Menu</h3>
+        </div>
+    </md-toolbar>
+
+    <div>
+        <md-list>
+        <md-list-item>
+            <router-link to="/" class="md-button" :class="`md-theme-${$material.currentTheme}`">
+            <md-icon>restaurant</md-icon> <span>Restaurants</span>
+            <md-ink-ripple />
+            </router-link>
+        </md-list-item>
+        <md-divider class="md-inset"></md-divider>
+        <md-list-item>
+            <router-link to="/recommendations" class="md-button" :class="`md-theme-${$material.currentTheme}`">
+            <md-icon>map</md-icon> <span>Recommendations</span>
+            <md-ink-ripple />
+            </router-link>
+        </md-list-item>
+        </md-list>
+    </div>
+    </md-sidenav>
     <md-spinner :md-size="150" md-indeterminate v-if="isLoading" style="height: 85vh;"></md-spinner>
     <md-layout v-else>
         <md-layout md-column md-flex-medium="100" style="height: calc(100vh - 64px);">
@@ -91,14 +128,13 @@
 <script>
 import Vue2Leaflet from 'vue2-leaflet';
 import axios from 'axios';
+import toolbarMixin from './../mixins/toolbarMixin';
 
 /* global L */
 const leaflet = L;
 
-// const corner1 = leaflet.latLng(46.2, -118.6);
-// const corner2 = leaflet.latLng(45.9, -118.1);
-
 export default {
+    mixins: [toolbarMixin],
     name: 'example',
     components: {
         'v-map': Vue2Leaflet.Map,
@@ -121,7 +157,6 @@ export default {
             url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
             marker: leaflet.latLng(0, 0),
             path: '/static/',
-            // maxBounds: leaflet.latLngBounds(corner1, corner2),
             maxZoom: 18,
             minZoom: 13,
             isLoading: true,
