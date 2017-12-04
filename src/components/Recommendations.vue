@@ -13,7 +13,9 @@
             <md-button md-menu-trigger class="md-raised">{{currentCategory}}</md-button>
 
             <md-menu-content>
-                <md-menu-item @selected="categorySelected('Pizza')">Pizza</md-menu-item>
+                <div v-for="(category, index) in categories" :key="index">
+                    <md-menu-item @selected="categorySelected(category)">{{category}}</md-menu-item>
+                </div>
             </md-menu-content>
         </md-menu>
         <md-button class="md-icon-button" @click="transition('users')">
@@ -64,7 +66,9 @@
             <md-button md-menu-trigger class="md-raised md-primary">{{currentCategory}}</md-button>
 
             <md-menu-content>
-                <md-menu-item @selected="categorySelected('Pizza')">Pizza</md-menu-item>
+                <div v-for="(category, index) in categories" :key="index">
+                    <md-menu-item @selected="categorySelected(category)">{{category}}</md-menu-item>
+                </div>
             </md-menu-content>
         </md-menu>
     </div>
@@ -112,6 +116,7 @@ export default {
             maxZoom: 18,
             minZoom: 13,
             recommendations: [],
+            categories: [],
             isLoading: false,
             offset: 1,
             limit: 10,
@@ -126,11 +131,19 @@ export default {
             try {
                 if (this.category) {
                     this.isLoading = true;
-                    const response = await axios.get(`http://asktoniapi-staging.azurewebsites.net/api/Recomendation${this.queryString}`);
+                    const response = await axios.get(`http://asktoniapi-staging.azurewebsites.net/api/Recommendation${this.queryString}`);
                     this.model = response.data;
                     this.recommendations = this.model;
                     this.isLoading = false;
                 }
+            } catch (e) {
+                console.error(e);
+            }
+        },
+        async getCategories() {
+            try {
+                const response = await axios.get('http://asktoniapi-staging.azurewebsites.net/api/Recommendation/Categories');
+                this.categories = response.data;
             } catch (e) {
                 console.error(e);
             }
@@ -147,6 +160,9 @@ export default {
             this.currentCategory = category;
             this.getModel();
         }
+    },
+    created() {
+        return this.getCategories();
     }
 };
 </script>
