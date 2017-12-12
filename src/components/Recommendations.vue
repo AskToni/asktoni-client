@@ -131,7 +131,7 @@ export default {
             try {
                 if (this.category) {
                     this.isLoading = true;
-                    const response = await axios.get(`http://asktoniapi-staging.azurewebsites.net/api/Recommendation${this.queryString}`);
+                    const response = await axios.get(`http://asktoniapi.azurewebsites.net/api/Recommendation${this.queryString}`);
                     this.model = response.data;
                     this.recommendations = this.model;
                     this.isLoading = false;
@@ -142,7 +142,7 @@ export default {
         },
         async getCategories() {
             try {
-                const response = await axios.get('http://asktoniapi-staging.azurewebsites.net/api/Recommendation/Categories');
+                const response = await axios.get('http://asktoniapi.azurewebsites.net/api/Recommendation/Categories');
                 this.categories = response.data;
             } catch (e) {
                 console.error(e);
