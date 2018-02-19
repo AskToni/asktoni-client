@@ -29,7 +29,7 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.18.0",
     "leaflet": "^1.2.0",
     "leaflet.icon.glyph": "^0.2.0",
     "sass-loader": "^6.0.6",
