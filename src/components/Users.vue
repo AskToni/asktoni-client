@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import toolbarMixin from './../mixins/toolbarMixin';
+import toolbarMixin from '../mixins/toolbarMixin';
 
 export default {
     mixins: [toolbarMixin],

@@ -9,7 +9,7 @@ before_script: greenkeeper-lockfile-update
 script:
 - yarn run build
 - yarn run ci-test
-- yarn run lint
+- yarn run lint-ci
 after_script: greenkeeper-lockfile-upload
 deploy:
   provider: surge
