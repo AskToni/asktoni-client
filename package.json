@@ -16,7 +16,6 @@
     "lint-ci": "eslint . --quiet --ext .js,.vue src config test/unit/specs test/e2e/specs",
     "lint-fix": "npm run prettier && eslint . --fix --max-warnings 0 --ext .js,.vue src config test/unit/specs test/e2e/specs",
     "lint-fix-simple": "eslint . --fix --ext .js,.vue src config test/unit/specs test/e2e/specs",
-    "precommit": "lint-staged",
     "prettier": "prettier --single-quote --tab-width 4 --print-width 100 --write \"{src,test/unit/specs,test/e2e/specs,config}/**/!(.eslintrc).js\"",
     "start": "node build/dev-server.js",
     "test": "npm run unit && npm run e2e",
@@ -120,5 +119,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
