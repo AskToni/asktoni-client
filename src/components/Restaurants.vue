@@ -84,6 +84,8 @@
                 :md-page-options="page.options"
                 @pagination="onPagination"></md-table-pagination>
         </md-table-card>
+
+        <div class="initial-load-message" v-if="isLoading">App takes a while to load on first load...</div>
   </div>
 </template>
 
@@ -210,6 +212,9 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .initial-load-message{
+            margin-top: 50px;
         }
     }
 </style>
