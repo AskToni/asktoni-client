@@ -84,12 +84,14 @@
                 :md-page-options="page.options"
                 @pagination="onPagination"></md-table-pagination>
         </md-table-card>
+
+        <div class="initial-load-message" v-if="isLoading">App takes a while to load on first load...</div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import toolbarMixin from './../mixins/toolbarMixin';
+import toolbarMixin from '../mixins/toolbarMixin';
 
 export default {
     mixins: [toolbarMixin],
@@ -156,12 +158,12 @@ export default {
     methods: {
         clientSort(a, b, type, name) {
             switch (name) {
-            case 'restaurantName':
-            case 'price':
-                return type === 'asc' ? a[name].localeCompare(b[name])
-                    : b[name].localeCompare(a[name]);
-            default:
-                return type === 'asc' ? a[name] - b[name] : b[name] - a[name];
+                case 'restaurantName':
+                case 'price':
+                    return type === 'asc' ? a[name].localeCompare(b[name])
+                        : b[name].localeCompare(a[name]);
+                default:
+                    return type === 'asc' ? a[name] - b[name] : b[name] - a[name];
             }
         },
         async getModel() {
@@ -210,6 +212,9 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .initial-load-message{
+            margin-top: 50px;
         }
     }
 </style>

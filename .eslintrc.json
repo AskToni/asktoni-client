@@ -1,0 +1,30 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "airbnb-base",
+        "redtn"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+    "html"
+    ],
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+            "config": "build/webpack.base.conf.js"
+            }
+        }
+    },
+    "rules": {
+        "import/extensions": ["error", "always", {
+          "js": "never",
+          "vue": "never"
+        }],
+        "import/no-extraneous-dependencies": ["error", {
+          "optionalDependencies": ["test/unit/index.js"]
+        }]
+      }
+}
