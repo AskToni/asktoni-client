@@ -94,7 +94,7 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^3.0.0",
     "lint-staged": "^8.1.0",
-    "lolex": "^3.0.0",
+    "lolex": "^4.0.1",
     "mocha": "^6.0.2",
     "moment": "^2.18.1",
     "nightwatch": "^1.0.1",
