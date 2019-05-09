@@ -95,7 +95,7 @@
     "karma-webpack": "^3.0.0",
     "lint-staged": "^8.1.0",
     "lolex": "^4.0.1",
-    "mocha": "^6.0.2",
+    "mocha": "^6.1.4",
     "moment": "^2.18.1",
     "nightwatch": "^1.0.1",
     "node-sass": "^4.7.2",
