@@ -2,9 +2,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 /* eslint-disable import/first */
 import Vue from 'vue';
+import VueMaterial from 'vue-material';
 import App from './App';
 import router from './router';
-import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.css';
 
 Vue.config.productionTip = false;

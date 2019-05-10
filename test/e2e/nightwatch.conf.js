@@ -1,7 +1,7 @@
 require('babel-register');
-const config = require('../../config');
 const serverpath = require('selenium-server').path;
 const chromedriverpath = require('chromedriver').path;
+const config = require('../../config');
 
 // http://nightwatchjs.org/gettingstarted#settings-file
 module.exports = {

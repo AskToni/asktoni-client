@@ -128,7 +128,7 @@
 <script>
 import Vue2Leaflet from 'vue2-leaflet';
 import axios from 'axios';
-import toolbarMixin from './../mixins/toolbarMixin';
+import toolbarMixin from '../mixins/toolbarMixin';
 
 /* global L */
 const leaflet = L;
