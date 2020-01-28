@@ -90,9 +90,6 @@ workflows:
       - lint-job:
           requires:
             - install-job
-      - deployment-job:
-          requires:
-            - build-storybook-job
           filters:
             branches:
               only: master
