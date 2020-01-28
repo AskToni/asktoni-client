@@ -1,0 +1,98 @@
+version: 2
+jobs:
+  install-job:
+    docker:
+      - image: circleci/node:10.18
+    working_directory: ~/asktoni-client
+    steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - persist_to_workspace:
+          root: ~/asktoni-client
+          paths:
+            - node_modules/*
+
+  test-job:
+    docker:
+      - image: circleci/node:10.18
+
+    working_directory: ~/asktoni-client
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/asktoni-client
+      - run: yarn ci-test
+
+  lint-job:
+    docker:
+      - image: circleci/node:10.18
+
+    working_directory: ~/asktoni-client
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/asktoni-client
+      - run: yarn lint-ci
+
+  build-job:
+    docker:
+      - image: circleci/node:10.18
+
+    working_directory: ~/asktoni-client
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/asktoni-client
+      - run: yarn build
+      - persist_to_workspace:
+          root: ~/asktoni-client
+          paths:
+            - dist/*
+
+  deployment-job:
+    docker:
+      - image: circleci/node:10.18
+
+    working_directory: ~/asktoni-client
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/asktoni-client
+      - run: yarn surge --project ./dist --domain asktoni.surge.sh
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - install-job
+      - build-job:
+          requires:
+            - install-job
+      - test-job:
+          requires:
+            - install-job
+      - lint-job:
+          requires:
+            - install-job
+      - deployment-job:
+          requires:
+            - build-storybook-job
+          filters:
+            branches:
+              only: master
