@@ -1,8 +1,9 @@
 sudo: false
 language: node_js
 node_js:
-- '8'
 - '10'
+# fix when node 12 test passes
+# - '12'
 notifications:
   email: true
 before_install: yarn global add greenkeeper-lockfile@1
