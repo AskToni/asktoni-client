@@ -679,6 +679,13 @@
   dependencies:
     type-detect "4.0.8"
 
+"@sinonjs/commons@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.7.0.tgz#f90ffc52a2e519f018b13b6c4da03cbff36ebed6"
+  integrity sha512-qbk9AP+cZUsKdW1GJsBpxPKFmCJ0T8swwzVje3qFd+AkQb74Q/tiuzrdfFg8AD2g5HH/XbE/I8Uc1KYHVYWfhg==
+  dependencies:
+    type-detect "4.0.8"
+
 "@sinonjs/formatio@^3.1.0", "@sinonjs/formatio@^3.2.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@sinonjs/formatio/-/formatio-3.2.1.tgz#52310f2f9bcbc67bdac18c94ad4901b95fde267e"
@@ -5620,10 +5627,12 @@ lolex@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/lolex/-/lolex-3.1.0.tgz#1a7feb2fefd75b3e3a7f79f0e110d9476e294434"
 
-lolex@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/lolex/-/lolex-5.0.1.tgz#6dcd8812cfa725b98db6521f7d89929fee4e677d"
-  integrity sha512-CDEwkXui3ZrulrA+f4ewVuEo5rOXLrVhfLLG7FS+gaP5qhdGMaKLWCtK0crVZRhHiNRQwPAdP7KtRyEQRFQa7g==
+lolex@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/lolex/-/lolex-6.0.0.tgz#790de1911da46e67e4b60c94859d19e2db0bb7e9"
+  integrity sha512-ad9IBHbfVJ3bPAotDxnCgJgKcNK5/mrRAfbJzXhY5+PEmuBWP7wyHQlA6L8TfSfPlqlDjY4K7IG6mbzsrIBx1A==
+  dependencies:
+    "@sinonjs/commons" "^1.7.0"
 
 loose-envify@^1.0.0:
   version "1.4.0"
