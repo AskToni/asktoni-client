@@ -105,7 +105,7 @@
     "ora": "^4.0.2",
     "phantomjs-prebuilt": "^2.1.14",
     "prettier": "^1.6.1",
-    "rimraf": "^2.6.0",
+    "rimraf": "^3.0.2",
     "selenium-server": "^3.5.3",
     "semver": "^7.1.1",
     "shelljs": "^0.8.0",
