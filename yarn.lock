@@ -9375,11 +9375,10 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue2-leaflet@^0.0.58:
-  version "0.0.58"
-  resolved "https://registry.yarnpkg.com/vue2-leaflet/-/vue2-leaflet-0.0.58.tgz#acfd0f7530292c60893a0b5b3cf648f06de530d1"
-  dependencies:
-    leaflet "^1.2.0"
+vue2-leaflet@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/vue2-leaflet/-/vue2-leaflet-2.5.1.tgz#61e96070971e2c1dee66cbdf7324c59d42a15d3b"
+  integrity sha512-vr6N7ZLSO3ow5ifrB6IvRgxka9jTAysvNWjdbvX/ct38yOMeJxTlz5EJWXE1OxU13ira0dDzIy08sq+SKNcFmg==
 
 vue@^2.4.4, vue@^2.5.21:
   version "2.5.21"
