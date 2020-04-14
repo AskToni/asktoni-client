@@ -118,7 +118,7 @@
     "vue-template-compiler": "^2.5.21",
     "vue2-leaflet": "^0.0.58",
     "webpack": "^4.41.5",
-    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-bundle-analyzer": "^3.7.0",
     "webpack-dev-middleware": "^3.6.2",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
