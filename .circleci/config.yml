@@ -2,7 +2,7 @@ version: 2
 jobs:
   install-job:
     docker:
-      - image: circleci/node:10.18
+      - image: circleci/node:Erbium
     working_directory: ~/asktoni-client
     steps:
       - checkout
@@ -25,11 +25,9 @@ jobs:
             - node_modules/*
 
   test-job:
-    docker:
-      - image: circleci/node:10.18
-
+   docker:
+      - image: circleci/node:Erbium
     working_directory: ~/asktoni-client
-
     steps:
       - checkout
       - attach_workspace:
@@ -38,10 +36,8 @@ jobs:
 
   lint-job:
     docker:
-      - image: circleci/node:10.18
-
+      - image: circleci/node:Erbium
     working_directory: ~/asktoni-client
-
     steps:
       - checkout
       - attach_workspace:
@@ -50,10 +46,8 @@ jobs:
 
   build-job:
     docker:
-      - image: circleci/node:10.18
-
+      - image: circleci/node:Erbium
     working_directory: ~/asktoni-client
-
     steps:
       - checkout
       - attach_workspace:
@@ -66,10 +60,8 @@ jobs:
 
   deployment-job:
     docker:
-      - image: circleci/node:10.18
-
+      - image: circleci/node:Erbium
     working_directory: ~/asktoni-client
-
     steps:
       - checkout
       - attach_workspace:
@@ -92,7 +84,7 @@ workflows:
             - install-job
       - deployment-job:
           requires:
-            - build-storybook-job
+            - build-job
           filters:
             branches:
               only: master
