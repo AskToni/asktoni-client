@@ -25,7 +25,7 @@ jobs:
             - node_modules/*
 
   test-job:
-   docker:
+    docker:
       - image: circleci/node:Erbium
     working_directory: ~/asktoni-client
     steps:
