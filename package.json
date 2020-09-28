@@ -6,25 +6,25 @@
   "private": true,
   "scripts": {
     "build": "node build/build.js",
-    "ci-test": "npm run unit",
+    "ci-test": "yarn unit",
     "clean": "rm -rf node_modules dist && yarn install",
-    "deploy": "rm -rf dist && npm run build && surge dist asktoni.surge.sh",
-    "deploy-staging": "rm -rf dist && npm run build && surge dist asktoni-staging.surge.sh",
+    "deploy": "rm -rf dist && yarn build && surge dist asktoni.surge.sh",
+    "deploy-staging": "rm -rf dist && yarn build && surge dist asktoni-staging.surge.sh",
     "dev": "node build/dev-server.js",
     "e2e": "node test/e2e/runner.js",
     "lint": "eslint . --ext .js,.vue src config test/unit/specs test/e2e/specs",
     "lint-ci": "eslint . --quiet --ext .js,.vue src config test/unit/specs test/e2e/specs",
-    "lint-fix": "npm run prettier && eslint . --fix --max-warnings 0 --ext .js,.vue src config test/unit/specs test/e2e/specs",
+    "lint-fix": "yarn prettier && eslint . --fix --max-warnings 0 --ext .js,.vue src config test/unit/specs test/e2e/specs",
     "lint-fix-simple": "eslint . --fix --ext .js,.vue src config test/unit/specs test/e2e/specs",
     "prettier": "prettier --single-quote --tab-width 4 --print-width 100 --write \"{src,test/unit/specs,test/e2e/specs,config}/**/!(.eslintrc).js\"",
     "start": "node build/dev-server.js",
     "surge": "surge",
-    "test": "npm run unit && npm run e2e",
+    "test": "yarn unit && yarn e2e",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run"
   },
   "lint-staged": {
     "{src,test/unit/specs,test/e2e/specs,config}/**/!(.eslintrc).js": [
-      "npm run prettier",
+      "yarn prettier",
       "eslint . --fix --ext .js,.vue src config test/unit/specs test/e2e/specs",
       "git add"
     ]
@@ -107,7 +107,7 @@
     "prettier": "^1.6.1",
     "rimraf": "^2.6.0",
     "selenium-server": "^3.5.3",
-    "semver": "^7.1.1",
+    "semver": "^6.0.0",
     "shelljs": "^0.8.0",
     "sinon": "^7.2.7",
     "sinon-chai": "^3.2.0",
@@ -117,14 +117,14 @@
     "vue-style-loader": "^4.0.1",
     "vue-template-compiler": "^2.5.21",
     "vue2-leaflet": "^0.0.58",
-    "webpack": "^4.41.5",
+    "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-dev-middleware": "^3.6.2",
+    "webpack-dev-middleware": "^2.0.0",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
-    "node": ">= 12.0.0",
+    "node": "^8.0.0",
     "yarn": "^1.22.4"
   },
   "browserslist": [
