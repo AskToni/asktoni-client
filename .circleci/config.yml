@@ -2,7 +2,7 @@ version: 2
 jobs:
   install-job:
     docker:
-      - image: circleci/node:carbon
+      - image: circleci/node:8.12.0
     working_directory: ~/asktoni-client
     steps:
       - checkout
@@ -26,7 +26,7 @@ jobs:
 
   test-job:
     docker:
-      - image: circleci/node:carbon
+      - image: circleci/node:8.12.0
     working_directory: ~/asktoni-client
     steps:
       - checkout
@@ -36,7 +36,7 @@ jobs:
 
   lint-job:
     docker:
-      - image: circleci/node:carbon
+      - image: circleci/node:8.12.0
     working_directory: ~/asktoni-client
     steps:
       - checkout
@@ -46,7 +46,7 @@ jobs:
 
   build-job:
     docker:
-      - image: circleci/node:carbon
+      - image: circleci/node:8.12.0
     working_directory: ~/asktoni-client
     steps:
       - checkout
@@ -60,7 +60,7 @@ jobs:
 
   deployment-job:
     docker:
-      - image: circleci/node:carbon
+      - image: circleci/node:8.12.0
     working_directory: ~/asktoni-client
     steps:
       - checkout
