@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "build": "node build/build.js",
+    "check-ci": "circleci config validate",
     "ci-test": "npm run unit",
     "clean": "rm -rf node_modules dist && yarn install",
     "deploy": "rm -rf dist && npm run build && surge dist asktoni.surge.sh",
