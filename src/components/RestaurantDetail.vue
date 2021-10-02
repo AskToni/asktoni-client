@@ -177,7 +177,9 @@ export default {
                 }));
                 this.isLoading = false;
             } catch (e) {
+                /* eslint-disable no-console */
                 console.error(e);
+                /* eslint-enable no-console */
             }
         }
     },
