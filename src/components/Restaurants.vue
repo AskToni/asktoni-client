@@ -91,6 +91,7 @@
 
 <script>
 import axios from 'axios';
+import faker from 'faker';
 import toolbarMixin from '../mixins/toolbarMixin';
 
 export default {
@@ -146,6 +147,14 @@ export default {
                 }
             ],
             model: [],
+            placeholderModel: [...Array(100)].map(() => {
+                return {
+                    restaurantName: faker.company.companyName(),
+                    reviewCount: Math.floor(Math.random() * 1000) + 1,
+                    rating: Math.floor(Math.random() * 5) + 1,
+                    price: [...Array(Math.floor(Math.random() * 4) + 1)].map(() => '$').join('')
+                };
+            }),
             page: {
                 options: [10, 25, 50, 100],
                 offset: 1,
@@ -177,7 +186,8 @@ export default {
                 this.resetPagination();
                 this.isLoading = false;
             } catch (e) {
-                this.errors.push(e);
+                this.model = this.placeholderModel;
+                this.isLoading = false;
             }
         },
         onPagination(args) {
