@@ -128,6 +128,7 @@
 <script>
 import Vue2Leaflet from 'vue2-leaflet';
 import axios from 'axios';
+import faker from 'faker';
 import toolbarMixin from '../mixins/toolbarMixin';
 
 /* global L */
@@ -160,7 +161,7 @@ export default {
             maxZoom: 18,
             minZoom: 13,
             isLoading: true,
-            reviews: []
+            reviews: [],
         };
     },
     methods: {
@@ -180,6 +181,18 @@ export default {
                 /* eslint-disable no-console */
                 console.error(e);
                 /* eslint-enable no-console */
+
+                this.isLoading = false;
+                this.model = {
+                    restaurantName: faker.company.companyName(),
+                    phone: '1112223333'
+                };
+
+                const latitude = faker.address.latitude();
+                const longitude = faker.address.longitude();
+
+                this.marker = leaflet.latLng(latitude, longitude);
+                this.center = leaflet.latLng(latitude, longitude);
             }
         }
     },
