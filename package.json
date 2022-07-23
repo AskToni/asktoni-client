@@ -97,7 +97,7 @@
     "lint-staged": "^9.2.1",
     "lolex": "^5.0.1",
     "mocha": "^6.1.4",
-    "moment": "^2.29.2",
+    "moment": "^2.29.4",
     "nightwatch": "^1.1.12",
     "node-sass": "^4.7.2",
     "opn": "^6.0.0",
