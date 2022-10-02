@@ -2,7 +2,7 @@ version: 2
 jobs:
   install-job:
     docker:
-      - image: circleci/node:12.22
+      - image: cimg/node:14.20
     working_directory: ~/asktoni-client
     steps:
       - checkout
@@ -26,7 +26,7 @@ jobs:
 
   test-job:
     docker:
-      - image: circleci/node:12.22
+      - image: cimg/node:14.20
 
     working_directory: ~/asktoni-client
 
@@ -38,7 +38,7 @@ jobs:
 
   lint-job:
     docker:
-      - image: circleci/node:12.22
+      - image: cimg/node:14.20
 
     working_directory: ~/asktoni-client
 
@@ -50,7 +50,7 @@ jobs:
 
   build-job:
     docker:
-      - image: circleci/node:12.22
+      - image: cimg/node:14.20
 
     working_directory: ~/asktoni-client
 
@@ -66,7 +66,7 @@ jobs:
 
   deployment-job:
     docker:
-      - image: circleci/node:12.22
+      - image: cimg/node:14.20
 
     working_directory: ~/asktoni-client
 
