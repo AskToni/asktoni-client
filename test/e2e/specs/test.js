@@ -13,5 +13,5 @@ module.exports = {
             .waitForElementVisible('#app', 5000)
             .assert.elementPresent('.restaurants')
             .end();
-    }
+    },
 };

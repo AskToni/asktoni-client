@@ -10,9 +10,9 @@ export default {
     name: 'index',
     data() {
         return {
-            msg: null
+            msg: null,
         };
-    }
+    },
 };
 </script>
 

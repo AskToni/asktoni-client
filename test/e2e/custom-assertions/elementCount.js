@@ -21,9 +21,10 @@ exports.assertion = function (selector, count) {
         const self = this;
         return this.api.execute(
             () => document.querySelectorAll(selector).length,
-            [selector], (res) => {
+            [selector],
+            (res) => {
                 cb.call(self, res);
-            }
+            },
         );
     };
 };

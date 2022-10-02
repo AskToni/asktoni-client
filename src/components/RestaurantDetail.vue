@@ -141,7 +141,7 @@ export default {
         'v-map': Vue2Leaflet.Map,
         'v-tilelayer': Vue2Leaflet.TileLayer,
         'v-marker': Vue2Leaflet.Marker,
-        'v-icondefault': Vue2Leaflet.IconDefault
+        'v-icondefault': Vue2Leaflet.IconDefault,
     },
     computed: {
         hrefPhone() {
@@ -149,7 +149,7 @@ export default {
         },
         hrefGoogle() {
             return `https://www.google.com/maps/?q=${this.model.latitude},${this.model.longitude}`;
-        }
+        },
     },
     data() {
         return {
@@ -174,7 +174,7 @@ export default {
                 this.marker = leaflet.latLng(this.model.latitude, this.model.longitude);
                 this.reviews = await Promise.all(this.model.reviewIDs.map(async (reviewID) => {
                     const reviewResponse = await axios.get(`http://asktoniapi.azurewebsites.net/api/Review/${reviewID}`);
-                    return Object.assign({}, { show: true }, reviewResponse.data);
+                    return { show: true, ...reviewResponse.data };
                 }));
                 this.isLoading = false;
             } catch (e) {
@@ -185,7 +185,7 @@ export default {
                 this.isLoading = false;
                 this.model = {
                     restaurantName: faker.company.companyName(),
-                    phone: '1112223333'
+                    phone: '1112223333',
                 };
 
                 const latitude = faker.address.latitude();
@@ -194,11 +194,11 @@ export default {
                 this.marker = leaflet.latLng(latitude, longitude);
                 this.center = leaflet.latLng(latitude, longitude);
             }
-        }
+        },
     },
     created() {
         this.getModel();
-    }
+    },
 };
 </script>
 
