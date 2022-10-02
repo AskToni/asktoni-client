@@ -91,7 +91,7 @@ export default {
         'v-tilelayer': Vue2Leaflet.TileLayer,
         'v-marker': Vue2Leaflet.Marker,
         'v-icondefault': Vue2Leaflet.IconDefault,
-        'v-popup': Vue2Leaflet.Popup
+        'v-popup': Vue2Leaflet.Popup,
     },
     computed: {
         queryString() {
@@ -102,7 +102,7 @@ export default {
                 return this.currentCategory;
             }
             return false;
-        }
+        },
     },
     data() {
         return {
@@ -122,7 +122,7 @@ export default {
             limit: 10,
             text: 'test',
             /* eslint-disable max-len */
-            maxBounds: leaflet.latLngBounds(leaflet.latLng(46.2, -118.6), leaflet.latLng(45.9, -118.1))
+            maxBounds: leaflet.latLngBounds(leaflet.latLng(46.2, -118.6), leaflet.latLng(45.9, -118.1)),
             /* eslint-enable max-len */
         };
     },
@@ -137,7 +137,9 @@ export default {
                     this.isLoading = false;
                 }
             } catch (e) {
+                /* eslint-disable no-console */
                 console.error(e);
+                /* eslint-enable no-console */
             }
         },
         async getCategories() {
@@ -145,7 +147,9 @@ export default {
                 const response = await axios.get('http://asktoniapi.azurewebsites.net/api/Recommendation/Categories');
                 this.categories = response.data;
             } catch (e) {
+                /* eslint-disable no-console */
                 console.error(e);
+                /* eslint-enable no-console */
             }
         },
         mapChanging() {
@@ -159,11 +163,11 @@ export default {
         categorySelected(category) {
             this.currentCategory = category;
             this.getModel();
-        }
+        },
     },
     created() {
         return this.getCategories();
-    }
+    },
 };
 </script>
 

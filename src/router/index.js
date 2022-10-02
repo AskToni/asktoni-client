@@ -13,27 +13,27 @@ export default new Router({
         {
             path: '/',
             name: 'Restaurants',
-            component: Restaurants
+            component: Restaurants,
         },
         {
             path: '/restaurant/:id',
             name: 'Restaurant Detail',
-            component: RestaurantDetail
+            component: RestaurantDetail,
         },
         {
             path: '/index',
             name: 'Index',
-            component: Index
+            component: Index,
         },
         {
             path: '/recommendations',
             name: 'Recommendations',
-            component: Recommendations
+            component: Recommendations,
         },
         {
             path: '/users',
             name: 'Users',
-            component: Users
-        }
-    ]
+            component: Users,
+        },
+    ],
 });

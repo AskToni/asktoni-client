@@ -5,11 +5,12 @@
     },
     "extends": [
         "airbnb-base",
-        "redtn"
+        "redtn",
+        "plugin:vue/base"
     ],
-    "parser": "babel-eslint",
+    "parser": "vue-eslint-parser",
     "plugins": [
-    "html"
+    "vue"
     ],
     "settings": {
         "import/resolver": {
@@ -19,6 +20,7 @@
         }
     },
     "rules": {
+        "max-len": ["error", { "code": 170 }],
         "import/extensions": ["error", "always", {
           "js": "never",
           "vue": "never"

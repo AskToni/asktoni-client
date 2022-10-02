@@ -9,63 +9,63 @@ function setup() {
     Vue.material.registerTheme({
         default: {
             primary: 'blue',
-            accent: 'pink'
+            accent: 'pink',
         },
         blue: {
             primary: 'blue',
-            accent: 'pink'
+            accent: 'pink',
         },
         indigo: {
             primary: 'indigo',
-            accent: 'pink'
+            accent: 'pink',
         },
         brown: {
             primary: 'brown',
-            accent: 'green'
+            accent: 'green',
         },
         purple: {
             primary: 'purple',
-            accent: 'blue'
+            accent: 'blue',
         },
         orange: {
             primary: 'orange',
-            accent: 'purple'
+            accent: 'purple',
         },
         green: {
             primary: 'green',
-            accent: 'pink'
+            accent: 'pink',
         },
         'light-blue': {
             primary: 'light-blue',
-            accent: 'yellow'
+            accent: 'yellow',
         },
         teal: {
             primary: 'teal',
-            accent: 'orange'
+            accent: 'orange',
         },
         'blue-grey': {
             primary: 'blue-grey',
-            accent: 'blue'
+            accent: 'blue',
         },
         cyan: {
             primary: 'cyan',
-            accent: 'pink'
+            accent: 'pink',
         },
         red: {
             primary: 'red',
-            accent: 'pink'
+            accent: 'pink',
         },
         white: {
             primary: 'white',
-            accent: 'blue'
+            accent: 'blue',
         },
         grey: {
             primary: {
                 color: 'grey',
-                hue: 300
+                hue: 300,
             },
-            accent: 'indigo'
-        }
+            accent: 'indigo',
+        },
     });
 
     Vue.material.setCurrentTheme('default');

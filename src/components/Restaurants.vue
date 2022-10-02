@@ -119,7 +119,7 @@ export default {
         },
         modelCount() {
             return this.model.length;
-        }
+        },
     },
     data() {
         return {
@@ -128,40 +128,38 @@ export default {
                 {
                     name: 'Restaurant',
                     value: 'restaurantName',
-                    width: '50%'
+                    width: '50%',
                 },
                 {
                     name: 'Reviews',
                     value: 'reviewCount',
-                    width: '10%'
+                    width: '10%',
                 },
                 {
                     name: 'Rating',
                     value: 'rating',
-                    width: '10%'
+                    width: '10%',
                 },
                 {
                     name: 'Price',
                     value: 'price',
-                    width: '10%'
-                }
+                    width: '10%',
+                },
             ],
             model: [],
-            placeholderModel: [...Array(100)].map(() => {
-                return {
-                    restaurantName: faker.company.companyName(),
-                    reviewCount: Math.floor(Math.random() * 1000) + 1,
-                    rating: Math.floor(Math.random() * 5) + 1,
-                    price: [...Array(Math.floor(Math.random() * 4) + 1)].map(() => '$').join('')
-                };
-            }),
+            placeholderModel: [...Array(100)].map(() => ({
+                restaurantName: faker.company.companyName(),
+                reviewCount: Math.floor(Math.random() * 1000) + 1,
+                rating: Math.floor(Math.random() * 5) + 1,
+                price: [...Array(Math.floor(Math.random() * 4) + 1)].map(() => '$').join(''),
+            })),
             page: {
                 options: [10, 25, 50, 100],
                 offset: 1,
-                limit: 10
+                limit: 10,
             },
             searchValue: '',
-            isLoading: true
+            isLoading: true,
         };
     },
     methods: {
@@ -204,14 +202,13 @@ export default {
             this.page.offset = 1;
         },
         searchFilter(restaurant, filterValue) {
-            return restaurant.filter(model =>
-                model.restaurantName.toLowerCase().replace(/\s/g, '')
-                    .includes(filterValue.toLowerCase().replace(/\s/g, '')));
-        }
+            return restaurant.filter((model) => model.restaurantName.toLowerCase().replace(/\s/g, '')
+                .includes(filterValue.toLowerCase().replace(/\s/g, '')));
+        },
     },
     created() {
         this.getModel();
-    }
+    },
 };
 </script>
 

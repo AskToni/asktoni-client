@@ -5,6 +5,6 @@ module.exports = {
         },
         transition(path) {
             this.$router.push(path);
-        }
-    }
+        },
+    },
 };

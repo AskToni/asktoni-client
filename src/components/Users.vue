@@ -46,7 +46,7 @@ import toolbarMixin from '../mixins/toolbarMixin';
 
 export default {
     mixins: [toolbarMixin],
-    name: 'users'
+    name: 'users',
 };
 </script>
 
