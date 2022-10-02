@@ -1,4 +1,4 @@
-require('babel-register');
+require('@babel/register');
 const serverpath = require('selenium-server').path;
 const chromedriverpath = require('chromedriver').path;
 const config = require('../../config');
