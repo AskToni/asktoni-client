@@ -21,7 +21,7 @@
     "start": "node build/dev-server.js",
     "surge": "surge",
     "test": "npm run unit && npm run e2e",
-    "unit": "cross-env CHROME_BIN=/usr/bin/google-chrome BABEL_ENV=test karma start test/unit/karma.conf.js --single-run"
+    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run"
   },
   "lint-staged": {
     "{src,test/unit/specs,test/e2e/specs,config}/**/!(.eslintrc).js": [

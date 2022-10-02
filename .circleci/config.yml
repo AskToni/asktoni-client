@@ -30,6 +30,9 @@ jobs:
 
     working_directory: ~/asktoni-client
 
+    environment:
+      CHROME_BIN: /usr/bin/google-chrome
+
     steps:
       - checkout
       - attach_workspace:
