@@ -2,7 +2,7 @@ version: 2
 jobs:
   install-job:
     docker:
-      - image: cimg/node:14.20
+      - image: cimg/node:14.20-browsers
     working_directory: ~/asktoni-client
     steps:
       - checkout
@@ -26,7 +26,7 @@ jobs:
 
   test-job:
     docker:
-      - image: cimg/node:14.20
+      - image: cimg/node:14.20-browsers
 
     working_directory: ~/asktoni-client
 
@@ -41,7 +41,7 @@ jobs:
 
   lint-job:
     docker:
-      - image: cimg/node:14.20
+      - image: cimg/node:14.20-browsers
 
     working_directory: ~/asktoni-client
 
@@ -53,7 +53,7 @@ jobs:
 
   build-job:
     docker:
-      - image: cimg/node:14.20
+      - image: cimg/node:14.20-browsers
 
     working_directory: ~/asktoni-client
 
@@ -69,7 +69,7 @@ jobs:
 
   deployment-job:
     docker:
-      - image: cimg/node:14.20
+      - image: cimg/node:14.20-browsers
 
     working_directory: ~/asktoni-client
 
