@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/AskToni/asktoni-client.svg?branch=master)](https://travis-ci.org/AskToni/asktoni-client)
-[![Greenkeeper badge](https://badges.greenkeeper.io/AskToni/asktoni-client.svg)](https://greenkeeper.io/)
 # asktoni-client
 ## Demo
 
