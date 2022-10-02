@@ -137,7 +137,9 @@ export default {
                     this.isLoading = false;
                 }
             } catch (e) {
+                /* eslint-disable no-console */
                 console.error(e);
+                /* eslint-enable no-console */
             }
         },
         async getCategories() {
@@ -145,7 +147,9 @@ export default {
                 const response = await axios.get('http://asktoniapi.azurewebsites.net/api/Recommendation/Categories');
                 this.categories = response.data;
             } catch (e) {
+                /* eslint-disable no-console */
                 console.error(e);
+                /* eslint-enable no-console */
             }
         },
         mapChanging() {
