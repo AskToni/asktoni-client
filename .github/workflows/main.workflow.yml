@@ -1,0 +1,34 @@
+---
+
+###########################################################################################
+# This workflow runs for PRs and master.
+###########################################################################################
+name: Main
+
+"on":
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/erbium
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint
+        run: yarn lint-ci
+      - name: Test
+        run: yarn ci-test
+      - name: Build
+        run: yarn build
+      - name: Deploy
+        if: github.ref == 'refs/heads/master'
+        run: yarn surge --project ./dist --domain asktoni.surge.sh --token ${{ secrets.SURGE_TOKEN }}
