@@ -108,7 +108,7 @@
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "selenium-server": "^3.5.3",
-    "semver": "^7.1.1",
+    "semver": "^7.5.4",
     "shelljs": "^0.8.5",
     "sinon": "^7.2.7",
     "sinon-chai": "^3.2.0",
