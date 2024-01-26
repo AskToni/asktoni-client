@@ -31,7 +31,7 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^1.6.7",
     "faker": "^5.5.3",
     "leaflet": "^1.2.0",
     "leaflet.icon.glyph": "^0.2.0",
